@@ -188,15 +188,14 @@ class General:
 
         created_on = "{}\n({} jours)".format(user_created, since_created)
         joined_on = "{}\n({} jours)".format(user_joined, since_joined)
-
-        game = "En train de chill sur {}".format(user.status)
+        game = ""
 
         if user.game is None:
             pass
         elif user.game.url is None:
             game = "Joue à {}".format(user.game)
         else:
-            game = "Est en train de steam: [{}]({})".format(user.game, user.game.url)
+            game = "Est en train de stream: [{}]({})".format(user.game, user.game.url)
 
         if roles:
             roles = sorted(roles, key=[x.name for x in server.role_hierarchy
@@ -206,8 +205,8 @@ class General:
             roles = "Aucun"
 
         data = discord.Embed(description=game, colour=user.colour)
-        data.add_field(name="Compte créé en", value=created_on)
-        data.add_field(name="A rejoint le serveur en", value=joined_on)
+        data.add_field(name="Création", value=created_on)
+        data.add_field(name="Arrivée", value=joined_on)
         data.add_field(name="Rôles", value=roles, inline=False)
         data.set_footer(text="Membre #{} | ID:{}"
                              "".format(member_number, user.id))
@@ -224,7 +223,7 @@ class General:
         try:
             await self.bot.say(embed=data)
         except discord.HTTPException:
-            await self.bot.say("J'ai besoin de pouvoir envoyer des liens integrés pour ça")
+            await self.bot.say("**Erreur** | J'ai besoin de pouvoir envoyer des messages au format *Embed*")
 
     @commands.command(pass_context=True, no_pm=True)
     async def serverinfo(self, ctx):
