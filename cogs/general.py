@@ -24,7 +24,7 @@ class RPSParser:
         argument = argument.lower()
         if argument == "pierre":
             self.choice = RPS.rock
-        elif argument == "papier":
+        elif argument == "feuille":
             self.choice = RPS.paper
         elif argument == "ciseaux":
             self.choice = RPS.scissors
