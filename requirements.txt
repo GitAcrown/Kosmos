@@ -8,3 +8,4 @@ wikipedia
 wikipedia-api
 pyfootball
 country_converter
+lyricwikia
