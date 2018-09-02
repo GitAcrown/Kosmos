@@ -1511,6 +1511,7 @@ class Audio:
         titre = " ".join(titre)
         try:
             paroles = lyricwikia.get_lyrics(artiste, titre)
+            print("Paroles pour {} - {} trouvées".format(artiste, titre))
             splitp = paroles.split("\n")
             texte = ""
             n = 1
@@ -1522,9 +1523,10 @@ class Audio:
                     await self.bot.say(embed=em)
                     texte = ""
                     n += 1
-            em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
-            em.set_footer(text="— Page {}".format(n))
-            await self.bot.say(embed=em)
+            if texte:
+                em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
+                em.set_footer(text="— Page {}".format(n))
+                await self.bot.say(embed=em)
         except Exception as e:
             await self.bot.say("Je n'ai pas trouvé les paroles de cette chanson. \n• Assurez-vous d'avoir indiqué le bon artiste et le bon titre. \n• N'oubliez pas les éventuels guillemets\n{}".format(e))
 
