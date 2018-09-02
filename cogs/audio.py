@@ -1525,8 +1525,8 @@ class Audio:
             em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
             em.set_footer(text="— Page {}".format(n))
             await self.bot.say(embed=em)
-        except:
-            await self.bot.say("Je n'ai pas trouvé les paroles de cette chanson. \n• Assurez-vous d'avoir indiqué le bon artiste et le bon titre. \n• N'oubliez pas les éventuels guillemets")
+        except Exception as e:
+            await self.bot.say("Je n'ai pas trouvé les paroles de cette chanson. \n• Assurez-vous d'avoir indiqué le bon artiste et le bon titre. \n• N'oubliez pas les éventuels guillemets\n{}".format(e))
 
     @commands.group(pass_context=True, no_pm=True)
     async def playlist(self, ctx):
