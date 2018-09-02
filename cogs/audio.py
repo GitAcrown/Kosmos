@@ -1521,13 +1521,13 @@ class Audio:
         for i in splitp:
             texte += i + "\n"
             if len(texte) > (1990 * n):
-                em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
+                em = discord.Embed(title="{} - {}".format(artiste, titre), description = texte)
                 em.set_footer(text="— Page {}".format(n))
                 await self.bot.say(embed=em)
                 texte = ""
                 n += 1
         if texte:
-            em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
+            em = discord.Embed(title="{} - {}".format(artiste, titre), description = texte)
             em.set_footer(text="— Page {}".format(n))
             await self.bot.say(embed=em)
         
