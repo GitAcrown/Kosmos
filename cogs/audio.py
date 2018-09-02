@@ -1512,24 +1512,25 @@ class Audio:
         try:
             paroles = lyricwikia.get_lyrics(artiste, titre)
             print("Paroles pour {} - {} trouvées".format(artiste, titre))
-            splitp = paroles.split("\n")
-            texte = ""
-            n = 1
-            for i in splitp:
-                texte += i + "\n"
-                if len(texte) > (1990 * n):
-                    em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
-                    em.set_footer(text="— Page {}".format(n))
-                    await self.bot.say(embed=em)
-                    texte = ""
-                    n += 1
-            if texte:
+        except Exception as e:
+            await self.bot.say("Je n'ai pas trouvé les paroles de cette chanson. \n• Assurez-vous d'avoir indiqué le bon artiste et le bon titre. \n• N'oubliez pas les éventuels guillemets\n• Erreur: `{}`".format(e))
+            return
+        splitp = paroles.split("\n")
+        texte = ""
+        n = 1
+        for i in splitp:
+            texte += i + "\n"
+            if len(texte) > (1990 * n):
                 em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
                 em.set_footer(text="— Page {}".format(n))
                 await self.bot.say(embed=em)
-        except Exception as e:
-            await self.bot.say("Je n'ai pas trouvé les paroles de cette chanson. \n• Assurez-vous d'avoir indiqué le bon artiste et le bon titre. \n• N'oubliez pas les éventuels guillemets\n{}".format(e))
-
+                texte = ""
+                n += 1
+        if texte:
+            em = discord.Embed(title="{} - {}".format(artiste, titre), description = paroles)
+            em.set_footer(text="— Page {}".format(n))
+            await self.bot.say(embed=em)
+        
     @commands.group(pass_context=True, no_pm=True)
     async def playlist(self, ctx):
         """Gestion des playlists"""
